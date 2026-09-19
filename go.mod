@@ -1,0 +1,3 @@
+module myfirstgo
+
+go 1.26.5
