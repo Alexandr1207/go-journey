@@ -21,5 +21,10 @@ func (book *Book) ApplyDiscount(percent float64) {
 }
 
 func NewBook(title string, author string, year int, price float64) *Book {
-	return &Book{Title: title, Author: author, Year: year, Price: price, internalID: title + author}
+	return &Book{
+		Title:      title,
+		Author:     author,
+		Year:       year,
+		Price:      price,
+		internalID: title + author}
 }
