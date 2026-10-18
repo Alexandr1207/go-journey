@@ -95,7 +95,6 @@ func BreakTrap() {
 			return
 		}
 	}
-	fmt.Println("count:", count)
 }
 
 func main() {
