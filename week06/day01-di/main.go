@@ -55,6 +55,8 @@ func SquareAll(nums []int, workers int) []int {
 	return out
 }
 
+// DEPENDENCY INJECTION
+
 type Notifier interface {
 	Send(to, msg string) error
 }
