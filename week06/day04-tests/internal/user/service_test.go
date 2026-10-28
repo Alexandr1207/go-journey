@@ -105,6 +105,38 @@ func TestRegister_NotifyFails(t *testing.T) {
 	}
 }
 
+func TestFind(t *testing.T) {
+	repo := storage.NewMemoryRepo()
+	fake := &notify.Fake{}
+	svc := user.NewService(repo, fake)
+
+	if _, err := svc.Register("Anna", "anna@x.com"); err != nil {
+		t.Fatalf("Register: unexpected error: %v", err)
+	}
+
+	tests := []struct {
+		name  string
+		email string
+		want  string
+		err   error
+	}{
+		{name: "found", email: "anna@x.com", want: "Anna", err: nil},
+		{name: "not found", email: "nobody@x.com", want: "", err: user.ErrNotFound},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := svc.Find(tt.email)
+			if !errors.Is(err, tt.err) {
+				t.Fatalf("Find(%q): got error %v, want %v", tt.email, err, tt.err)
+			}
+			if got.Name != tt.want {
+				t.Errorf("Find(%q): got name %q, want %q", tt.email, got.Name, tt.want)
+			}
+		})
+	}
+}
+
 //         myfirstgo/week06/day04-tests            coverage: 0.0% of statements
 // myfirstgo/week06/day04-tests/internal/notify            coverage: 0.0% of statements
 // ok      myfirstgo/week06/day04-tests/internal/storage   0.894s  coverage: 100.0% of statements

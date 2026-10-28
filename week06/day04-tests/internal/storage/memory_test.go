@@ -11,12 +11,12 @@ func TestMemoryRepo_SaveAssignsIDs(t *testing.T) {
 
 	first, err := repo.Save(user.User{Name: "Anna", Email: "anna@x.com"})
 	if err != nil {
-		t.Fatalf("first Save: enexpected error: %v", err)
+		t.Fatalf("first Save: unexpected error: %v", err)
 	}
 
 	second, err := repo.Save(user.User{Name: "Boris", Email: "boris@x.com"})
 	if err != nil {
-		t.Fatalf("second Save: enexpected error: %v", err)
+		t.Fatalf("second Save: unexpected error: %v", err)
 	}
 
 	if first.ID != 1 {
